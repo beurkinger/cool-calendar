@@ -17,32 +17,63 @@ body, input, textarea, button, select {
   line-height: 130%;
 }
 
+#app {
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+}
+
 .month {
-  margin: 10px;
-  letter-spacing: 1px;
-  font-size: 16px;
-  line-height: 16px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;  
+  display: inline-table;
+  margin: 15px 20px;
+  letter-spacing: 0.5px;
+  font-size: 15px;
+  line-height: 100%;
   text-align: center; 
+  table-layout:fixed;
   border-collapse: collapse;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.month:hover {
+  cursor: default;
 }
 
 .month caption {
-  padding: 10px 0;
+  letter-spacing: 2px;
+  padding: 8px 0;
   border-bottom: 3px solid black;
   text-transform: uppercase;
-  margin-bottom: 4px;
-  font-weight: bold;
+  margin: 0 4px 5px 4px;
+  font-weight: 500;
 }
 
 .month th,
 .month td {
-  /* font-family: Helvetica, Arial, sans-serif; */
-  width: 28px; height: 24px;
+  /* padding-top: 1px; */
+  width: 28px; max-width: 28px;
+  height: 28px; max-height: 28px;
   padding: 0; margin: 0;
   text-align: center;
   overflow: hidden;
+  white-space: nowrap;
+  /* border: 1px solid #E5E5E5; */
+}
+
+.month th {
+  font-weight: 500;
+}
+
+.month td {
+  font-weight: 300;
+}
+
+.month td:hover:not(.muted) {
+ font-weight: 500;
 }
 
 .month .muted {
-  color: #CCC;
+  /* color: #CCC; */
+  color: rgba(0, 0, 0, 0.2);
 }
