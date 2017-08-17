@@ -1,28 +1,19 @@
 import Inferno from 'inferno';
 
-const getTableRow = (days, start, getCellFn) => {
-    const week = days.slice(start, start + 7);
-    return <div>{week.map(getCellFn)}</div>
-};
+const getHeaderRow = week => <thead>{week.days.map(getHeaderCell)}</thead>
+const getWeekRow = week => <tr>{week.days.map(getDateCell)}</tr>
+const getHeaderCell = day => <th>{day.name.slice(0, 2)}</th>;
+const getDateCell = day => <td class={day.inCurrentMonth ? '' : 'muted'}>{day.date}</td>;
 
-const getHeaderCell = day => <span style={{margin: '5px'}}>{day.name.slice(0, 2)}</span>;
-const getDateCell = day => <span style={{margin: '5px'}}>{day.date}</span>;
-
-const getHeaderRow = days => getTableRow(days, 0, getHeaderCell);
-const getWeekRow = (days, start) => getTableRow(days, start, getDateCell);
+// const formatDateNbr = i => i < 10 ? '0' + i : i
 
 const Month = props => {
     return (
-        <div class="month">
-            <div class="month-name">{props.month.name}</div> 
-            {getHeaderRow(props.month.days)}
-            {getWeekRow(props.month.days, 0)}
-            {getWeekRow(props.month.days, 7)}
-            {getWeekRow(props.month.days, 14)}
-            {getWeekRow(props.month.days, 21)}
-            {getWeekRow(props.month.days, 28)}
-            {getWeekRow(props.month.days, 35)}
-        </div>
+        <table class="month">
+            <caption>{props.month.name}</caption> 
+            {getHeaderRow(props.month.weeks[0])}
+            {props.month.weeks.map(getWeekRow)}
+        </table>
     )
 }
 

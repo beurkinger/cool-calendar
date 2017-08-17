@@ -9,10 +9,40 @@ html, body, #root {
 
 html {
   line-height: 1.15;
-  -ms-text-size-adjust: 100%;-
+  -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 
 body, input, textarea, button, select {
   line-height: 130%;
+}
+
+.month {
+  margin: 10px;
+  letter-spacing: 1px;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center; 
+  border-collapse: collapse;
+}
+
+.month caption {
+  padding: 10px 0;
+  border-bottom: 3px solid black;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+.month th,
+.month td {
+  /* font-family: Helvetica, Arial, sans-serif; */
+  width: 28px; height: 24px;
+  padding: 0; margin: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.month .muted {
+  color: #CCC;
 }
