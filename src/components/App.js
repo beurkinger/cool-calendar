@@ -90,7 +90,7 @@ const getDay = (year, month, day) => {
   return { 
     date : dateObj.getDate(), 
     id : dateObj.getDay(),
-    name: monthFormatter.format(dateObj),    
+    name: dayFormatter.format(dateObj),    
     inCurrentMonth: (dateObj.getMonth() === month)
   }
 }
