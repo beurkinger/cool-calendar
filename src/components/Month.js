@@ -76,7 +76,6 @@ class Month extends Component {
     }
 
     render () {
-        console.log(this.props);
         return (
             <table class="month" onmouseleave={this.handleLeave}>
                 {this.getCaption(this.props.name, this.props.year)}

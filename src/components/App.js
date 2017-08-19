@@ -1,9 +1,9 @@
+import style from '../css/style.css';
+
 import Inferno from 'inferno'
 import Component from 'inferno-component'
 
 import Month from './Month'
-
-import style from '../css/style.css';
 
 const nbDaysInAWeek = 7
 const locale = "en-us"
@@ -25,20 +25,20 @@ const locale = "en-us"
 //   }
 // }
 
-const getFirstDay = (year, month) => {
+const getFirstDayOfMonth = month  => year => {
+  console.log({month, year});
   const dateObj = new Date(year, month, 1)
   return dateObj.getDay()
 }
 
-const getFirstDayOfYear = year => getFirstDay(year, 0)
-const getFirstDayOfMonth = year => month => getFirstDay(year, month)
+const getFirstDayOfYear = getFirstDayOfMonth(0)
 
 // const isDateNextYear = (year, month, date) => (currentYear) => {
 //   const dateObj = new Date(year, month, date)
 //   return parseInt(dateObj.getFullYear()) > parseInt(currentYear)
 // }
 
-// Return true if a date belongs to the next month (ie is true for 2016, 3, 34)
+// Return true if a date belongs to the next month (ie : returns true for 2016, 3, 34)
 const isDateNextMonth = (year, month, date) => {
   const dateObj = new Date(year, month, date)
   return  parseInt(dateObj.getFullYear()) > parseInt(year) 
@@ -54,21 +54,23 @@ const getYear = year => ({
 })
 
 const getMonths = year => {
-  return [0,1,2,3,4,5,6,7,8,9,10,11].map(month => { 
-    const dateObj = new Date(year, month)
-    return {
-      id : month,
-      name: dateObj.toLocaleString( locale, { month : "long" }),
-      weeks : getWeeks(year, month),
-      year: year
-    }
-  })
+  return [0,1,2,3,4,5,6,7,8,9,10,11].map(month => getMonth(year, month))
+}
+
+const getMonth = (year, month) => {
+  const dateObj = new Date(year, month)
+  return {
+    id : month,
+    name: dateObj.toLocaleString( locale, { month : "long" }),
+    weeks : getWeeks(year, month),
+    year: year
+  }
 }
 
 const getWeeks = (year, month) => {
   let weeks = []
   let weekId = 0;
-  let date = 1 - getFirstDayOfMonth(year)(month)
+  let date = 1 - getFirstDayOfMonth(month)(year)
   while (true && date < 100) { // date < 100 = security to prevent infinite loops
     if (isDateNextMonth(year, month, date)) break
     weeks.push(getWeek(weekId)(year, month, date))
@@ -78,16 +80,10 @@ const getWeeks = (year, month) => {
   return weeks
 }
 
-const getWeek = id => (year, month, startingDate) => {
-  let days = []
-  for (let i = 0; i < nbDaysInAWeek; i ++) {
-    days.push(getDay(year, month, startingDate + i))
-  }
-  return {
-    id : id,
-    days : days
-  }
-}
+const getWeek = id => (year, month, startingDate) => ({
+  id : id,
+  days : [0,1,2,3,4,5,6].map(i => getDay(year, month, startingDate + i))
+})
 
 const getDay = (year, month, day) => {
   const dateObj = new Date(year, month, day)  
