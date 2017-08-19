@@ -3,6 +3,8 @@ import Component from 'inferno-component'
 
 import Month from './Month'
 
+import style from '../css/style.css';
+
 const nbDaysInAWeek = 7
 const locale = "en-us"
 
@@ -57,7 +59,8 @@ const getMonths = year => {
     return {
       id : month,
       name: dateObj.toLocaleString( locale, { month : "long" }),
-      weeks : getWeeks(year, month)
+      weeks : getWeeks(year, month),
+      year: year
     }
   })
 }
@@ -99,7 +102,7 @@ const getDay = (year, month, day) => {
 class App extends Component {
 
   getMonthComponent (month) {
-    return <Month month={month} />
+    return <Month id={month.id} name={month.name} weeks={month.weeks} year={month.year} />
   }  
 
 	render () {

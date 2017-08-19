@@ -13,27 +13,34 @@ class Month extends Component {
         this.getHeaderRow = this.getHeaderRow.bind(this)
         this.getWeekRow = this.getWeekRow.bind(this)
         this.getHeaderCell = this.getHeaderCell.bind(this)
-        this.getDateCell = this.getDateCell.bind(this)
-        this.handleOver = this.handleOver.bind(this)
+        this.getWeekCell = this.getWeekCell.bind(this)
+        this.handleHover = this.handleHover.bind(this)
         this.handleLeave = this.handleLeave.bind(this)
     }
     
-    getTitleRow (monthName) {
-        return <tr><th colSpan={nbDaysInWeek}>{monthName}</th></tr>
+    // getTitleRow (monthName) {
+    //     return <tr><th colSpan={nbDaysInWeek}>{monthName}</th></tr>
+    // }
+    getCaption (monthName, year) {
+        return (
+            <caption>
+                {monthName} <span>{year}</span>
+            </caption>
+        )
     }
     getHeaderRow (week) {
         return <tr>{week[0].days.map(this.getHeaderCell)}</tr>
     }
     getWeekRow (week) {
-        return <tr>{week.days.map(this.getDateCell)}</tr>
+        return <tr>{week.days.map(this.getWeekCell)}</tr>
     }
     getHeaderCell (day) {
         return <th>{day.name.slice(0, 2)}</th>
     }
-    getDateCell (day) {
+    getWeekCell (day) {
         return (
             <td class={day.inCurrentMonth ? '' : 'muted'} 
-                onmouseover={e => day.inCurrentMonth ? this.handleOver(day) : this.handleLeave()} 
+                onmouseover={e => day.inCurrentMonth ? this.handleHover(day) : this.handleLeave()} 
                 >
                 {day.date}
             </td>
@@ -44,10 +51,9 @@ class Month extends Component {
         return <tr><th colspan={nbDaysInWeek}>{date.name} {date.date}</th></tr>
     }
 
-    getHeader (weeks, monthName, selectedDay) {
+    getHeader (weeks, selectedDay) {
         return (
             <thead>
-                {this.getTitleRow(monthName)}
                 {selectedDay ? this.getDateDetails(selectedDay) : this.getHeaderRow(weeks)}
             </thead>
         )
@@ -61,7 +67,7 @@ class Month extends Component {
         )
     }
 
-    handleOver (day) {
+    handleHover (day) {
         this.setState({selectedDay : day});
     }
 
@@ -70,10 +76,12 @@ class Month extends Component {
     }
 
     render () {
+        console.log(this.props);
         return (
             <table class="month" onmouseleave={this.handleLeave}>
-                {this.getHeader(this.props.month.weeks, this.props.month.name, this.state.selectedDay)}
-                {this.getBody(this.props.month.weeks)}
+                {this.getCaption(this.props.name, this.props.year)}
+                {this.getHeader(this.props.weeks, this.state.selectedDay)}
+                {this.getBody(this.props.weeks)}
             </table>
         )
     }

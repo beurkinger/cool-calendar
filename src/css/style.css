@@ -3,8 +3,7 @@
 }
 
 html, body, #root {
-  height: 100%;
-  width: 100%;
+  width: 100%; height: 100%;
 }
 
 html {
@@ -19,7 +18,7 @@ body, input, textarea, button, select {
 
 #app {
   box-sizing: border-box;
-  width: 100%;height: 100%;
+  min-height: 100%; min-width: 100%;
   padding: 20px;
   background: #d7fad7;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -27,6 +26,7 @@ body, input, textarea, button, select {
 }
 
 .month {
+  position: relative;
   display: inline-table;
   margin: 15px 20px;
   letter-spacing: 0.5px;
@@ -42,6 +42,15 @@ body, input, textarea, button, select {
   cursor: default;
 }
 
+.month:hover::after {
+  position: absolute;
+  content: " ";
+  top: -4%; left: -5%;
+  width: 110%; height: 108%;
+  border: 1px solid rgba(0,0,0,0.8);
+  pointer-events: none;
+}
+
 .month caption {
   letter-spacing: 2px;
   padding: 8px 0;
@@ -49,6 +58,17 @@ body, input, textarea, button, select {
   text-transform: uppercase;
   margin: 0 4px 5px 4px;
   font-weight: 500;
+}
+
+.month caption span {
+  display: none;
+}
+
+.month:hover caption span {
+  display: inline;
+  /* font-weight: 300; */
+  /* letter-spacing: 1px; */
+  color: rgba(0, 0, 0, 0.40);
 }
 
 .month th,
@@ -71,20 +91,19 @@ body, input, textarea, button, select {
   font-weight: 300;
 }
 
-.month thead tr:first-child th {
+/* .month thead tr:first-child th {
   width: auto; height: auto; 
   max-width: auto; max-height: auto;
   letter-spacing: 2px;
   padding: 8px 0;
   border-bottom: 3px solid black;
   text-transform: uppercase;
-  /* margin: 0 4px 5px 4px; */
   font-weight: 500;
 }
 
 .month thead tr:nth-child(2) th {
   padding-top: 5px;
-}
+} */
 
 .month td:hover:not(.muted) {
  font-weight: 500;
