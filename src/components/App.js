@@ -1,4 +1,4 @@
-import style from '../css/style.css';
+import style from '../css/style.css'
 
 import Inferno from 'inferno'
 import Component from 'inferno-component'
@@ -7,6 +7,8 @@ import Month from './Month'
 
 const nbDaysInAWeek = 7
 const locale = "en-us"
+const dayFormatter = new Intl.DateTimeFormat(locale, {weekday: "long"})
+const monthFormatter = new Intl.DateTimeFormat(locale, {month: "long"})
 
 // const getNbDaysInMonth = (year, month) => {
 //   const nextMonth = month >= 11 ? 0 : month + 1 
@@ -26,7 +28,6 @@ const locale = "en-us"
 // }
 
 const getFirstDayOfMonth = month  => year => {
-  console.log({month, year});
   const dateObj = new Date(year, month, 1)
   return dateObj.getDay()
 }
@@ -61,7 +62,7 @@ const getMonth = (year, month) => {
   const dateObj = new Date(year, month)
   return {
     id : month,
-    name: dateObj.toLocaleString( locale, { month : "long" }),
+    name: monthFormatter.format(dateObj),
     weeks : getWeeks(year, month),
     year: year
   }
@@ -69,12 +70,11 @@ const getMonth = (year, month) => {
 
 const getWeeks = (year, month) => {
   let weeks = []
-  let weekId = 0;
+  let weekId = 0
   let date = 1 - getFirstDayOfMonth(month)(year)
-  while (true && date < 100) { // date < 100 = security to prevent infinite loops
-    if (isDateNextMonth(year, month, date)) break
+  while (!isDateNextMonth(year, month, date) && date < 100) { // date < 100 = security to prevent infinite loops
     weeks.push(getWeek(weekId)(year, month, date))
-    weekId++;
+    weekId++
     date += nbDaysInAWeek
   }
   return weeks
@@ -90,7 +90,7 @@ const getDay = (year, month, day) => {
   return { 
     date : dateObj.getDate(), 
     id : dateObj.getDay(),
-    name: dateObj.toLocaleString( locale, { weekday : "long" }),
+    name: monthFormatter.format(dateObj),    
     inCurrentMonth: (dateObj.getMonth() === month)
   }
 }
@@ -105,7 +105,6 @@ class App extends Component {
     console.time('test')
     const year = getYear(2016)
     console.timeEnd('test')
-    // return 'COOL CALENDAR';
     return <div id="app">{year.months.map(this.getMonthComponent)}</div>
 
 	}
