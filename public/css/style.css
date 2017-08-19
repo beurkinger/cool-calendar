@@ -19,12 +19,14 @@ body, input, textarea, button, select {
 
 #app {
   box-sizing: border-box;
+  width: 100%;height: 100%;
   padding: 20px;
-  text-align: center;
+  background: #d7fad7;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;  
 }
 
 .month {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;  
   display: inline-table;
   margin: 15px 20px;
   letter-spacing: 0.5px;
@@ -67,6 +69,21 @@ body, input, textarea, button, select {
 
 .month td {
   font-weight: 300;
+}
+
+.month thead tr:first-child th {
+  width: auto; height: auto; 
+  max-width: auto; max-height: auto;
+  letter-spacing: 2px;
+  padding: 8px 0;
+  border-bottom: 3px solid black;
+  text-transform: uppercase;
+  /* margin: 0 4px 5px 4px; */
+  font-weight: 500;
+}
+
+.month thead tr:nth-child(2) th {
+  padding-top: 5px;
 }
 
 .month td:hover:not(.muted) {
