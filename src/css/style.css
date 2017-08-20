@@ -19,10 +19,42 @@ body, input, textarea, button, select {
 #app {
   box-sizing: border-box;
   min-height: 100%; min-width: 100%;
-  padding: 20px;
   background: #d7fad7;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: center;  
+}
+
+header {
+  padding: 40px 20px 20px 20px;
+}
+
+#logo {
+  fill: rgba(0,0,0,0.8);
+  height: 30px;
+}
+
+
+#year-minus, #year-plus {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+#year-minus { 
+  margin-right: 10px;
+  border-width: 5px 8px 5px 0;
+  border-color: transparent #000000 transparent transparent;
+}
+
+#year-plus {
+  margin-left: 10px;  
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent #000000;
+}
+
+#body {
+  padding: 20px;
 }
 
 .month {

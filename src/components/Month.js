@@ -18,9 +18,10 @@ class Month extends Component {
         this.handleLeave = this.handleLeave.bind(this)
     }
     
-    // getTitleRow (monthName) {
-    //     return <tr><th colSpan={nbDaysInWeek}>{monthName}</th></tr>
-    // }
+    getTitleRow (monthName) {
+        return <tr><th colSpan={nbDaysInWeek}>{monthName}</th></tr>
+    }
+
     getCaption (monthName, year) {
         return (
             <caption>
@@ -76,11 +77,12 @@ class Month extends Component {
     }
 
     render () {
+        const {name, year, weeks} = this.props;
         return (
             <table class="month" onmouseleave={this.handleLeave}>
-                {this.getCaption(this.props.name, this.props.year)}
-                {this.getHeader(this.props.weeks, this.state.selectedDay)}
-                {this.getBody(this.props.weeks)}
+                {this.getCaption(name, year)}
+                {this.getHeader(weeks, this.state.selectedDay)}
+                {this.getBody(weeks)}
             </table>
         )
     }
