@@ -1,13 +1,12 @@
 import Inferno from 'inferno';
 
 import Logo from './Logo';
+import YearSelector from './YearSelector';
 
-const Header = ({year, minusYear, plusYear}) => (
+const Header = ({year, minusYear, plusYear, setYear}) => (
   <header>
-    <Logo/><br/>
-    <div id="year-minus" onClick={minusYear}></div>
-    <span>{year}</span>
-    <div id="year-plus" onClick={plusYear}></div>
+    <Logo/>
+    <YearSelector year={year} minusYear={minusYear} plusYear={plusYear} setYear={setYear} />
   </header>
 )
 
